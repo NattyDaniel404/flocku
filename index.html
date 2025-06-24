@@ -1,194 +1,135 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flock-U</title>
-    <script src="script.js" defer></script>
-    <link rel="stylesheet" href="style.css">
-  </head>
-  
-    
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Flock-U</title>
+  <script src="script.js" defer></script>
+  <link rel="stylesheet" href="style.css" />
+</head>
 
-  <!--website title-->
-  <body>
+<body>
+  <div class="container">
+    <!-- Site Header -->
     <header>
       <h1>Flock-U</h1>
+      <p class="site-description">
+        Flock-U is your official site for Flock Boys comics and merch. Read chapters, subscribe for updates, and shop for books and prints!
+      </p>
     </header>
-  </body>
-  
-<!-- website description -->
-  <p class="site-description">
-  Flock-U is your official site for Flock Boys comics and merch. Read chapters, subscribe for updates, and shop for books and prints!
-</p>
 
-  <!-- TAB NAVIGATION -->
-   <nav clas="tab-nav">
-    <button id="comicsTab">Comics</button>
-    <button id="storeTab">Store</button>
-   </nav>
-  
-     <!--Dark/Light mode toggle-->
-    <div class= "theme-toggle">
-        <p>Toggle light/dark mode</p>
+    <!-- Theme Toggle -->
+    <div class="theme-toggle">
+      <p>Toggle light/dark mode</p>
       <label class="switch">
-        <input type="checkbox" id="themeToggle">
+        <input type="checkbox" id="themeToggle" />
         <span class="slider round"></span>
       </label>
     </div>
 
-  <section id="comicsSection">
-  <!--Comic Title--> 
+    <!-- Navigation Tabs -->
+    <nav class="tab-nav">
+      <button id="comicsTab">Comics</button>
+      <button id="storeTab">Store</button>
+    </nav>
 
-  <body>
-    <div class="container">
-        <header>
-          <h2>Flock Boys</h2>
-          <h3 id="chapterTitle">Chapter 1: The Pool</h3> <!--id allows me to change the chapter title when on a different page -->
-          <p>After saving up all summer for a pool, the Flock Boys face an unexpected visitor...</p>
-        </header>
+    <!-- Comics Section -->
+    <section id="comicsSection">
+      <h2>Flock Boys</h2>
+      <h3 id="chapterTitle">Chapter 1: The Pool</h3>
+      <p>After saving up all summer for a pool, the Flock Boys face an unexpected visitor...</p>
 
-
-
-
-      <!--Comic Display Area-->
-        <main>
-          <section id="ComicViewer">
-            <img src="placeholderimage.png" alt="Comic page">
-          </section>
-        </main>
-
-      <!--Buttons and drop down for comic navigation -->
+      <main>
+        <section id="ComicViewer">
+          <h4>Comic Viewer</h4>
+          <img src="placeholderimage.png" alt="Comic page" />
+        </section>
 
         <section id="controls">
+          <h4>Navigation</h4>
           <button id="prevPage">Previous Page</button>
           <select id="chapterSelect">
-            <option value="Chapter 1: The Pool"> Chapter 1: The Pool</option>
-            <option value="Chapter 2: The Talent Show"> Chapter 2: The Talent Show </option>
+            <option value="Chapter 1: The Pool">Chapter 1: The Pool</option>
+            <option value="Chapter 2: The Talent Show">Chapter 2: The Talent Show</option>
           </select>
-
           <button id="nextPage">Next Page</button>
-        </section>    
+        </section>
+      </main>
+    </section>
 
-        <footer>
-          <p>2025 Flock Boys</p>
-        </footer>
-    
-  </body>
-</section>
+    <!-- Store Section -->
+    <section id="storeSection" style="display:none;">
+      <h2>Flock Store</h2>
 
+      <!-- Product Display -->
+      <div class="products">
+        <div class="product">
+          <img src="images/book.jpg" alt="Comic Book" width="200" />
+          <h3>Comic Book</h3>
+          <p>$15.00</p>
+          <button data-product="book">Add to Cart</button>
+        </div>
 
-<!-- SHOP SECTION -->
+        <div class="product">
+          <img src="placeholderimage.png" alt="Art Print" width="200" />
+          <h3>Art Print</h3>
+          <p>$5.00</p>
+          <button data-product="print">Add to Cart</button>
+        </div>
 
+        <div class="product">
+          <img src="images/sticker.jpg" alt="Sticker Pack" width="200" />
+          <h3>Sticker Pack</h3>
+          <p>$4.00</p>
+          <button data-product="sticker">Add to Cart</button>
+        </div>
+      </div>
 
-<section id="storeSection" style="display:none;">
+      <!-- Cart Summary -->
+      <div class="cart">
+        <h3>Your Cart</h3>
+        <ul id="cartItems"></ul>
+        <p>Subtotal: $<span id="subtotal">0.00</span></p>
+        <p>Tax (10%): $<span id="tax">0.00</span></p>
+        <p>Shipping: $<span id="shipping">0.00</span></p>
+        <p><strong>Total: $<span id="total">0.00</span></strong></p>
+        <button id="checkoutBtn">Checkout</button>
+      </div>
+    </section>
 
-</section>
-<h2>Flock Store</h2>
+    <!-- Contact Section -->
+    <section id="contact">
+      <h3>Get Updates on New Chapters!</h3>
+      <form id="contactForm">
+        <label for="fullName">Full Name:</label>
+        <input type="text" id="fullName" name="fullName" required />
+        <div class="error" id="nameError"></div>
 
-<!-- Product Display -->
-<div class="products">
-  <!-- Product 1: Flock Boys Volume 1 -->
-  <div class="product">
-    <img src="images/book.jpg" alt="Comic Book" width="200">
-    <h3>Comic Book</h3>
-    <p>$15.00</p>
-    <button data-product="book">Add to Cart</button>
+        <label for="phone">Phone Number:</label>
+        <input type="text" id="phone" name="phone" />
+        <div class="error" id="phoneError"></div>
+
+        <label for="email">Email Address:</label>
+        <input type="text" id="email" name="email" />
+        <div class="error" id="emailError"></div>
+
+        <label for="comments">Comments:</label>
+        <textarea id="comments" name="comments" required></textarea>
+        <div class="error" id="commentsError"></div>
+
+        <p>Where would you like to get notified?</p>
+        <label><input type="radio" name="contactMethod" value="email" /> Email</label>
+        <label><input type="radio" name="contactMethod" value="phone" /> Phone</label>
+
+        <button type="submit">Subscribe</button>
+        <div id="successMessage"></div>
+      </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <p>© 2025 Flock Boys</p>
+    </footer>
   </div>
-
-  <!-- Product 2: Art Print -->
-  <div class="product">
-    <img src="placeholderimage.png" alt="Art Print" width="200">
-    <h3>Art Print</h3>
-    <p>$5.00</p>
-    <button data-product="print">Add to Cart</button>
-  </div>
-
-  <!-- Product 3: Sticker Pack -->
-  <div class="product">
-    <img src="images/sticker.jpg" alt="Sticker Pack" width="200">
-    <h3>Sticker Pack</h3>
-    <p>$4.00</p>
-    <button data-product="sticker">Add to Cart</button>
-  </div>
-</div>
-
-<!-- Cart Summary -->
-<div class="cart">
-  <h3>Your Cart</h3>
-  <ul id="cartItems"></ul>
-  <p>Subtotal: $<span id="subtotal">0.00</span></p>
-  <p>Tax (10%): $<span id="tax">0.00</span></p>
-  <p>Shipping: $<span id="shipping">0.00</span></p>
-  <p><strong>Total: $<span id="total">0.00</span></strong></p>
-  <button id="checkoutBtn">Checkout</button>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- <!-- CONTACT INFO -->
-<section id="contact">
-  <h3>Get Updates on new Chapters!</h3>
-  <form id="contactForm">
-    
-    <!-- FULL NAME -->
-    <label for="fullName">Full Name:</label>
-    <input type="text" id="fullName" name="fullName" required>
-    <div class="error" id="nameError"></div>
-
-    <!-- PHONE NUMBER -->
-    <label for="phone">Phone Number:</label>
-    <input type="text" id="phone" name="phone">
-    <div class="error" id="phoneError"></div>
-
-    <!-- EMAIL ADDRESS -->
-    <label for="email">Email Address:</label>
-    <input type="text" id="email" name="email">
-    <div class="error" id="emailError"></div>
-
-    <!-- COMMENTS -->
-    <label for="comments">Comments:</label>
-    <textarea id="comments" name="comments" required></textarea>
-    <div class="error" id="commentsError"></div>
-
-    <!-- CONTACT PREFERENCE -->
-    <p>Where would you like to get notified?</p>
-    <label><input type="radio" name="contactMethod" value="email"> Email</label>
-    <label><input type="radio" name="contactMethod" value="phone"> Phone</label>
-
-    <!-- SUBMIT BUTTON -->
-    <button type="submit">Subscribe</button>
-
-    <!-- SUCCESS MESSAGE -->
-    <div id="successMessage"></div>
-  </form>
-</section>
-
-  </div>
+</body>
 </html>
