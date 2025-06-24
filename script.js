@@ -1,7 +1,7 @@
 "use strict";
 
 document.addEventListener("DOMContentLoaded", () => {
-  // THEME SWITCHER
+  // === THEME TOGGLE ===
   const toggle = document.getElementById("themeToggle");
   const body = document.body;
 
@@ -9,45 +9,66 @@ document.addEventListener("DOMContentLoaded", () => {
     body.classList.toggle("dark-mode");
   });
 
-
-  // TAB SWITCHER
-
+  // === TAB NAVIGATION ===
   const comicsTab = document.getElementById("comicsTab");
   const storeTab = document.getElementById("storeTab");
-  const comicSection = document.getElementById("comicsSection");
+  const comicsSection = document.getElementById("comicsSection");
   const storeSection = document.getElementById("storeSection");
 
   comicsTab.addEventListener("click", () => {
-  comicsSection.style.display = "block";
-  storeSection.style.display = "none";
-});
-storeTab.addEventListener("click", () => {
-  comicsSection.style.display = "none";
-  storeSection.style.display = "block";
-});
+    comicsSection.style.display = "block";
+    storeSection.style.display = "none";
+  });
 
+  storeTab.addEventListener("click", () => {
+    comicsSection.style.display = "none";
+    storeSection.style.display = "block";
+  });
 
-  
-
-  // FORM SUBMISSION
+  // === FORM SUBMISSION & VALIDATION ===
   const form = document.getElementById("contactForm");
   const successMessage = document.getElementById("successMessage");
 
   form.addEventListener("submit", function (e) {
     e.preventDefault();
 
+    // Get form values
     const fullName = document.getElementById("fullName").value.trim();
     const phone = document.getElementById("phone").value.trim();
     const email = document.getElementById("email").value.trim();
     const comments = document.getElementById("comments").value.trim();
     const contactMethod = document.querySelector('input[name="contactMethod"]:checked');
 
-    if (!fullName || !comments || !contactMethod) {
-      successMessage.textContent = "";
-      alert("Please fill out your name, comment, and select a contact method.");
-      return;
+    // Clear previous errors
+    document.querySelectorAll(".error").forEach(el => el.textContent = "");
+
+    // Basic validation
+    let valid = true;
+
+    if (!fullName) {
+      document.getElementById("nameError").textContent = "Name is required.";
+      valid = false;
     }
 
+    if (!comments) {
+      document.getElementById("commentsError").textContent = "Comment is required.";
+      valid = false;
+    }
+
+    if (!contactMethod) {
+      alert("Please select a contact method.");
+      valid = false;
+    } else if (contactMethod.value === "email" && !email) {
+      document.getElementById("emailError").textContent = "Email is required for this contact method.";
+      valid = false;
+    } else if (contactMethod.value === "phone" && !phone) {
+      document.getElementById("phoneError").textContent = "Phone is required for this contact method.";
+      valid = false;
+    }
+
+    if (!valid) return;
+
+    // Create object
     const customer = {
       name: fullName,
       phone: phone,
@@ -56,78 +77,64 @@ storeTab.addEventListener("click", () => {
       preferredContact: contactMethod.value
     };
 
-    successMessage.innerHTML = `
-      <p>Thank you, ${customer.name}! We'll contact you by ${customer.preferredContact} for chapter updates!</p>
-    `;
-
+    successMessage.innerHTML = `<p>Thank you, ${customer.name}! We'll contact you by ${customer.preferredContact} for chapter updates!</p>`;
     form.reset();
   });
-});
 
+  // === SHOPPING CART ===
+  const products = {
+    book: { name: "Comic Book", price: 15.0 },
+    print: { name: "Art Print", price: 5.0 },
+    sticker: { name: "Sticker Pack", price: 4.0 }
+  };
 
+  const cart = [];
 
-// CART SYSTEM
-
-
-const products = {
-  book: { name: "Comic Book", price: 10 },
-  print: { name: "Art Print", price: 7 },
-  sticker: { name: "Sticker Pack", price: 3 }
-};
-
-let cart = [];
-
-// Add to Cart Buttons
-document.querySelectorAll(".product button").forEach(button => {
-  button.addEventListener("click", () => {
-    const productKey = button.dataset.product;
-    cart.push(products[productKey]);
-    updateCartDisplay();
-  });
-});
-
-function updateCartDisplay() {
-  const cartItems = document.getElementById("cartItems");
+  const cartItemsEl = document.getElementById("cartItems");
   const subtotalEl = document.getElementById("subtotal");
   const taxEl = document.getElementById("tax");
   const shippingEl = document.getElementById("shipping");
   const totalEl = document.getElementById("total");
 
-  cartItems.innerHTML = ""; // Clear list
+  function updateCart() {
+    cartItemsEl.innerHTML = "";
+    let subtotal = 0;
 
-  let subtotal = 0;
+    cart.forEach(item => {
+      const li = document.createElement("li");
+      li.textContent = `${item.name} - $${item.price.toFixed(2)}`;
+      cartItemsEl.appendChild(li);
+      subtotal += item.price;
+    });
 
-  cart.forEach(item => {
-    const li = document.createElement("li");
-    li.textContent = `${item.name} - $${item.price.toFixed(2)}`;
-    cartItems.appendChild(li);
-    subtotal += item.price;
-  });
+    const tax = subtotal * 0.1;
+    const shipping = subtotal > 0 ? 5 : 0;
+    const total = subtotal + tax + shipping;
 
-  const tax = subtotal * 0.1;
-  const shipping = subtotal > 0 ? 5 : 0;
-  const total = subtotal + tax + shipping;
-
-  subtotalEl.textContent = subtotal.toFixed(2);
-  taxEl.textContent = tax.toFixed(2);
-  shippingEl.textContent = shipping.toFixed(2);
-  totalEl.textContent = total.toFixed(2);
-}
-document.getElementById("checkoutBtn").addEventListener("click", () => {
-  if (cart.length === 0) {
-    alert("Your cart is empty. Add items before checking out.");
-    return;
+    subtotalEl.textContent = subtotal.toFixed(2);
+    taxEl.textContent = tax.toFixed(2);
+    shippingEl.textContent = shipping.toFixed(2);
+    totalEl.textContent = total.toFixed(2);
   }
 
-  const subtotal = cart.reduce((sum, item) => sum + item.price, 0);
-  const tax = subtotal * 0.1;
-  const shipping = 5;
-  const total = subtotal + tax + shipping;
+  document.querySelectorAll("button[data-product]").forEach(button => {
+    button.addEventListener("click", () => {
+      const key = button.dataset.product;
+      cart.push(products[key]);
+      updateCart();
+    });
+  });
 
-  alert(`Thank you for your order!\nTotal: $${total.toFixed(2)}`);
+  document.getElementById("checkoutBtn").addEventListener("click", () => {
+    if (cart.length === 0) {
+      alert("Your cart is empty!");
+      return;
+    }
 
-  // Clear cart
-  cart = [];
-  updateCartDisplay();
+    const total = totalEl.textContent;
+    alert(`Thank you for your order! Your total is $${total}.`);
+
+    cart.length = 0;
+    updateCart();
+  });
 });
-
