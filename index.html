@@ -8,24 +8,24 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 
+<!-- theme toggle -->
+
+<header class="site-header">
+  <h1>Flock-U</h1>
+
+  <div class="theme-toggle">
+    <p>Toggle light/dark mode</p>
+    <label class="switch">
+      <input type="checkbox" id="themeToggle" />
+      <span class="slider round"></span>
+    </label>
+  </div>
+</header>
+
+
 <body>
   <div class="container">
-    <!-- Site Header -->
-    <header>
-      <h1>Flock-U</h1>
-      <p class="site-description">
-        Flock-U is your official site for Flock Boys comics and merch. Read chapters, subscribe for updates, and shop for books and prints!
-      </p>
-    </header>
-
-    <!-- Theme Toggle -->
-    <div class="theme-toggle">
-      <p>Toggle light/dark mode</p>
-      <label class="switch">
-        <input type="checkbox" id="themeToggle" />
-        <span class="slider round"></span>
-      </label>
-    </div>
+  
 
     <!-- Navigation Tabs -->
     <nav class="tab-nav">
@@ -37,15 +37,13 @@
     <main id="comicsSection">
       <h2>Flock Boys</h2>
       <h3 id="chapterTitle">Chapter 1: The Pool</h3>
-      <p>After saving up all summer for a pool, the Flock Boys face an unexpected visitor...</p>
+      <p>After saving up all year for a pool, the Flock Boys face an unexpected visitor...</p>
 
       <section id="ComicViewer">
-        <h4>Comic Viewer</h4>
         <img src="images/page1.png" alt="Comic Page 1" />
       </section>
 
       <section id="controls">
-        <h4>Navigation</h4>
         <button id="prevPage">Previous Page</button>
         <select id="chapterSelect">
           <option value="Chapter 1: The Pool">Chapter 1: The Pool</option>
@@ -123,6 +121,13 @@
         <div id="successMessage"></div>
       </form>
     </section>
+    <!-- site info -->
+    <header>
+      <p class="site-description">
+        Flock-U is your official site for Flock Boys comics and merch. Read chapters, subscribe for updates, and shop for books and prints!
+      </p>
+    </header>
+
 
     <!-- Footer -->
     <footer>
