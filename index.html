@@ -8,24 +8,20 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 
-<!-- theme toggle -->
-
-<header class="site-header">
-  <h1>Flock-U</h1>
-
-  <div class="theme-toggle">
-    <p>Toggle light/dark mode</p>
-    <label class="switch">
-      <input type="checkbox" id="themeToggle" />
-      <span class="slider round"></span>
-    </label>
-  </div>
-</header>
-
-
 <body>
   <div class="container">
-  
+
+    <!-- Site Header (VALID placement inside <body>) -->
+    <header class="site-header">
+      <h1>Flock-U</h1>
+      <div class="theme-toggle">
+        <p>Toggle light/dark mode</p>
+        <label class="switch">
+          <input type="checkbox" id="themeToggle" />
+          <span class="slider round"></span>
+        </label>
+      </div>
+    </header>
 
     <!-- Navigation Tabs -->
     <nav class="tab-nav">
@@ -57,7 +53,6 @@
     <section id="storeSection" style="display:none;">
       <h2>Flock Store</h2>
 
-      <!-- Product Display -->
       <div class="products">
         <div class="product">
           <img src="images/book.jpg" alt="Comic Book" width="200" />
@@ -81,7 +76,6 @@
         </div>
       </div>
 
-      <!-- Cart Summary -->
       <div class="cart">
         <h3>Your Cart</h3>
         <ul id="cartItems"></ul>
@@ -121,18 +115,17 @@
         <div id="successMessage"></div>
       </form>
     </section>
-    <!-- site info -->
-    <header>
-      <p class="site-description">
-        Flock-U is your official site for Flock Boys comics and merch. Read chapters, subscribe for updates, and shop for books and prints!
-      </p>
-    </header>
 
+    <!-- Site Info -->
+    <p class="site-description">
+      Flock-U is your official site for Flock Boys comics and merch. Read chapters, subscribe for updates, and shop for books and prints!
+    </p>
 
     <!-- Footer -->
     <footer>
       <p>© 2025 Flock Boys</p>
     </footer>
+
   </div>
 </body>
 </html>
