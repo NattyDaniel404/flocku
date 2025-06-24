@@ -25,6 +25,35 @@ document.addEventListener("DOMContentLoaded", () => {
     storeSection.style.display = "block";
   });
 
+
+  // === COMIC PAGE NAVIGATION ===
+
+let currentPage = 1;
+const totalPages = 20; 
+const comicImg = document.querySelector("#ComicViewer img");
+const chapterTitle = document.getElementById("chapterTitle");
+
+function updateComicPage() {
+  comicImg.src = `images/page${currentPage}.png`;
+  comicImg.alt = `Comic Page ${currentPage}`;
+}
+
+document.getElementById("nextPage").addEventListener("click", () => {
+  if (currentPage < totalPages) {
+    currentPage++;
+    updateComicPage();
+  }
+});
+
+document.getElementById("prevPage").addEventListener("click", () => {
+  if (currentPage > 1) {
+    currentPage--;
+    updateComicPage();
+  }
+});
+
+
+
   // === FORM SUBMISSION & VALIDATION ===
   const form = document.getElementById("contactForm");
   const successMessage = document.getElementById("successMessage");
