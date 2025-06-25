@@ -26,32 +26,43 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 
-  // === COMIC PAGE NAVIGATION ===
+ let currentPage = 1;
+const totalPages = 4; // Update this if more pages are added
 
-let currentPage = 1;
-const totalPages = 20; 
 const comicImg = document.querySelector("#ComicViewer img");
-const chapterTitle = document.getElementById("chapterTitle");
+const prevBtn = document.getElementById("prevPage");
+const nextBtn = document.getElementById("nextPage");
 
 function updateComicPage() {
+  // Update image source and alt text
   comicImg.src = `images/page${currentPage}.png`;
   comicImg.alt = `Comic Page ${currentPage}`;
+
+  // Toggle visibility of Previous button
+  prevBtn.style.display = currentPage === 1 ? "none" : "inline-block";
+
+  // Toggle visibility of Next button
+  nextBtn.style.display = currentPage === totalPages ? "none" : "inline-block";
 }
 
-document.getElementById("nextPage").addEventListener("click", () => {
+// Event listener for Next Page
+nextBtn.addEventListener("click", () => {
   if (currentPage < totalPages) {
     currentPage++;
     updateComicPage();
   }
 });
 
-document.getElementById("prevPage").addEventListener("click", () => {
+// Event listener for Previous Page
+prevBtn.addEventListener("click", () => {
   if (currentPage > 1) {
     currentPage--;
     updateComicPage();
   }
 });
 
+// Initialize viewer on load
+updateComicPage();
 
 
   // === FORM SUBMISSION & VALIDATION ===
@@ -71,7 +82,7 @@ document.getElementById("prevPage").addEventListener("click", () => {
     // Clear previous errors
     document.querySelectorAll(".error").forEach(el => el.textContent = "");
 
-    // Basic validation
+    
     let valid = true;
 
     if (!fullName) {
