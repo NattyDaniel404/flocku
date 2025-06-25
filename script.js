@@ -25,25 +25,48 @@ document.addEventListener("DOMContentLoaded", () => {
     storeSection.style.display = "block";
   });
 
+let currentChapter = "chapter1";
+let currentPage = 1;
 
- let currentPage = 1;
-const totalPages = 4; // Update this if more pages are added
+const chapterPages = {
+  chapter1: 4, //amount of pages on chapter 1
+  chapter2: 0, // amount of pages on chapter 2
+};
 
 const comicImg = document.querySelector("#ComicViewer img");
 const prevBtn = document.getElementById("prevPage");
 const nextBtn = document.getElementById("nextPage");
+const chapterSelect = document.getElementById("chapterSelect");
 
 function updateComicPage() {
-  // Update image source and alt text
-  comicImg.src = `images/page${currentPage}.png`;
-  comicImg.alt = `Comic Page ${currentPage}`;
-
-  // Toggle visibility of Previous button
+  const totalPages = chapterPages[currentChapter];
+  comicImg.src = `images/${currentChapter}/page${currentPage}.png`;
+  comicImg.alt = `Comic Page ${currentPage} of ${currentChapter}`;
   prevBtn.style.display = currentPage === 1 ? "none" : "inline-block";
-
-  // Toggle visibility of Next button
   nextBtn.style.display = currentPage === totalPages ? "none" : "inline-block";
 }
+
+nextBtn.addEventListener("click", () => {
+  const totalPages = chapterPages[currentChapter];
+  if (currentPage < totalPages) {
+    currentPage++;
+    updateComicPage();
+  }
+});
+
+prevBtn.addEventListener("click", () => {
+  if (currentPage > 1) {
+    currentPage--;
+    updateComicPage();
+  }
+});
+
+chapterSelect.addEventListener("change", () => {
+  currentChapter = chapterSelect.value === "Chapter 2: The Talent Show" ? "chapter2" : "chapter1";
+  currentPage = 1;
+  updateComicPage();
+});
+
 
 // Event listener for Next Page
 nextBtn.addEventListener("click", () => {
