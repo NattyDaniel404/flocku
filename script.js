@@ -25,68 +25,72 @@ document.addEventListener("DOMContentLoaded", () => {
     storeSection.style.display = "block";
   });
 
-let currentChapter = "chapter1";
-let currentPage = 1;
+  // === COMIC NAVIGATION & CHAPTER DATA ===
+  let currentChapter = "chapter1";
+  let currentPage = 1;
 
-const chapterPages = {
-  chapter1: 4, //amount of pages on chapter 1
-  chapter2: 0, // amount of pages on chapter 2
-};
+  const chapterData = {
+    chapter1: {
+      title: "Chapter 1: The Beach",
+      description: "After an intense heat day, the Flock Boys go to the beach.",
+      pages: 4
+    },
+    chapter2: {
+      title: "Chapter 2: The Talent Show",
+      description: "The Flock Boys enter a wild talent show and chaos follows.",
+      pages: 1
+    }
+  };
 
-const comicImg = document.querySelector("#ComicViewer img");
-const prevBtn = document.getElementById("prevPage");
-const nextBtn = document.getElementById("nextPage");
-const chapterSelect = document.getElementById("chapterSelect");
+  const comicImg = document.querySelector("#ComicViewer img");
+  const prevBtn = document.getElementById("prevPage");
+  const nextBtn = document.getElementById("nextPage");
+  const chapterSelect = document.getElementById("chapterSelect");
+  const chapterTitle = document.getElementById("chapterTitle");
+  const chapterDescription = document.getElementById("chapterDescription");
 
-function updateComicPage() {
-  const totalPages = chapterPages[currentChapter];
-  comicImg.src = `images/${currentChapter}/page${currentPage}.png`;
-  comicImg.alt = `Comic Page ${currentPage} of ${currentChapter}`;
-  prevBtn.style.display = currentPage === 1 ? "none" : "inline-block";
-  nextBtn.style.display = currentPage === totalPages ? "none" : "inline-block";
-}
+  function updateComicPage() {
+    const folder = currentChapter;
+    const totalPages = chapterData[currentChapter].pages;
 
-nextBtn.addEventListener("click", () => {
-  const totalPages = chapterPages[currentChapter];
-  if (currentPage < totalPages) {
-    currentPage++;
-    updateComicPage();
+    comicImg.src = `images/${folder}/page${currentPage}.png`;
+    comicImg.alt = `Comic Page ${currentPage} of ${chapterData[currentChapter].title}`;
+
+    prevBtn.style.display = currentPage === 1 ? "none" : "inline-block";
+    nextBtn.style.display = currentPage === totalPages ? "none" : "inline-block";
   }
-});
 
-prevBtn.addEventListener("click", () => {
-  if (currentPage > 1) {
-    currentPage--;
-    updateComicPage();
-  }
-});
+  nextBtn.addEventListener("click", () => {
+    if (currentPage < chapterData[currentChapter].pages) {
+      currentPage++;
+      updateComicPage();
+    }
+  });
 
-chapterSelect.addEventListener("change", () => {
-  currentChapter = chapterSelect.value === "Chapter 2: The Talent Show" ? "chapter2" : "chapter1";
+  prevBtn.addEventListener("click", () => {
+    if (currentPage > 1) {
+      currentPage--;
+      updateComicPage();
+    }
+  });
+
+  chapterSelect.addEventListener("change", () => {
+  const selectedOption = chapterSelect.options[chapterSelect.selectedIndex];
+  currentChapter = selectedOption.value;
   currentPage = 1;
+
+  // Update chapter title and description
+  document.getElementById("chapterTitle").textContent = selectedOption.dataset.title;
+  document.getElementById("chapterDescription").textContent = selectedOption.dataset.description;
+
   updateComicPage();
 });
 
 
-// Event listener for Next Page
-nextBtn.addEventListener("click", () => {
-  if (currentPage < totalPages) {
-    currentPage++;
-    updateComicPage();
-  }
-});
-
-// Event listener for Previous Page
-prevBtn.addEventListener("click", () => {
-  if (currentPage > 1) {
-    currentPage--;
-    updateComicPage();
-  }
-});
-
-// Initialize viewer on load
-updateComicPage();
-
+  // Initialize on load
+  chapterTitle.textContent = chapterData[currentChapter].title;
+  chapterDescription.textContent = chapterData[currentChapter].description;
+  updateComicPage();
 
   // === FORM SUBMISSION & VALIDATION ===
   const form = document.getElementById("contactForm");
@@ -95,17 +99,13 @@ updateComicPage();
   form.addEventListener("submit", function (e) {
     e.preventDefault();
 
-    // Get form values
     const fullName = document.getElementById("fullName").value.trim();
     const phone = document.getElementById("phone").value.trim();
     const email = document.getElementById("email").value.trim();
     const comments = document.getElementById("comments").value.trim();
     const contactMethod = document.querySelector('input[name="contactMethod"]:checked');
 
-    // Clear previous errors
     document.querySelectorAll(".error").forEach(el => el.textContent = "");
-
-    
     let valid = true;
 
     if (!fullName) {
@@ -131,7 +131,6 @@ updateComicPage();
 
     if (!valid) return;
 
-    // Create object
     const customer = {
       name: fullName,
       phone: phone,
