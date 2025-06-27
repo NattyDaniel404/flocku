@@ -2,7 +2,7 @@
 
 
 body {
-  font-family: "Luckiest Guy", cursive;
+  font-family: "Luckiest Guy", sans-serif;
   background-color: #599dfc;
   color: #333;
   padding: 20px;
@@ -86,12 +86,10 @@ body.dark-mode #contact {
 }
 .site-header {
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  justify-content: flex-start;
   align-items: center;
-}
-
-.theme-toggle {
-  margin-left: auto;
+  gap: 20px;
 }
 
 
@@ -366,3 +364,31 @@ footer {
   font-size: 0.9rem;
   color: #777;
 }
+
+/* mobile view */
+
+@media screen and (max-width: 600px) {
+  .theme-toggle {
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: left;
+    padding-right: 0;
+  }
+
+  .switch {
+    width: 40px;
+    height: 24px;
+  }
+
+  .slider:before {
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+  }
+
+  input:checked + .slider:before {
+    transform: translateX(16px);
+  }
+}
+
