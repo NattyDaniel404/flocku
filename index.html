@@ -32,6 +32,7 @@
     <nav class="tab-nav">
       <button id="comicsTab">Comics</button>
       <button id="storeTab">Store</button>
+      <button id="eggTab">Egg</button>
     </nav>
 
     <!-- Comics Section -->
@@ -102,6 +103,23 @@
         <button id="checkoutBtn">Checkout</button>
       </div>
     </section>
+
+    <!-- Egg Game -->
+    <section id="eggSection" style="display:none;">
+      <div class="egg-container">
+        <button id="eggButton">
+          <span id="eggCount">0</span>
+          <img src="images/game/egg.jpg" alt="Egg Button" />
+        </button>
+      </div>
+    </section>
+
+    <!-- farmer upgrade -->
+    <div class="upgrade-item">
+      <p>Farmer - Cost: 50 - Owned: <span id="farmerCount">0</span></p>
+      <button class="buy-upgrade" data-cost="50" data-upgrade="farmer">Buy</button>
+    </div>
+
 
     <!-- Contact Section -->
     <section id="contact">

@@ -14,16 +14,28 @@ document.addEventListener("DOMContentLoaded", () => {
   const storeTab = document.getElementById("storeTab");
   const comicsSection = document.getElementById("comicsSection");
   const storeSection = document.getElementById("storeSection");
+  const eggTab = document.getElementById("eggTab");
+  const eggSection = document.getElementById("eggSection");
 
   comicsTab.addEventListener("click", () => {
-    comicsSection.style.display = "block";
-    storeSection.style.display = "none";
-  });
+  comicsSection.style.display = "block";
+  storeSection.style.display = "none";
+  eggSection.style.display = "none";
+});
 
-  storeTab.addEventListener("click", () => {
-    comicsSection.style.display = "none";
-    storeSection.style.display = "block";
-  });
+storeTab.addEventListener("click", () => {
+  comicsSection.style.display = "none";
+  storeSection.style.display = "block";
+  eggSection.style.display = "none";
+});
+
+eggTab.addEventListener("click", () => {
+  comicsSection.style.display = "none";
+  storeSection.style.display = "none";
+  eggSection.style.display = "block";
+});
+
+
 
   // === COMIC NAVIGATION & CHAPTER DATA ===
   let currentChapter = "chapter1";
@@ -200,3 +212,64 @@ document.addEventListener("DOMContentLoaded", () => {
     updateCart();
   });
 });
+
+
+
+// EGG GAME
+
+
+// clicks = eggs
+let eggPoints = 0;
+let farmerCount = 0;
+let farmerInterval = null;
+
+const eggCountSpan = document.getElementById("eggCount");
+const eggButton = document.getElementById("eggButton");
+const upgradeButtons = document.querySelectorAll(".buy-upgrade");
+const farmerCountSpan = document.getElementById("farmerCount");
+
+// Egg click handler
+eggButton.addEventListener("click", () => {
+  eggPoints += 1;
+  updateEggDisplay();
+});
+
+// Upgrade purchase handler
+upgradeButtons.forEach(btn => {
+  btn.addEventListener("click", () => {
+    const cost = parseInt(btn.dataset.cost);
+    const upgradeType = btn.dataset.upgrade;
+
+    if (eggPoints >= cost) {
+      eggPoints -= cost;
+
+      if (upgradeType === "farmer") {
+        farmerCount++;
+        farmerCountSpan.textContent = farmerCount;
+        startFarmerInterval();
+      }
+
+      updateEggDisplay();
+    } else {
+      alert("Not enough eggs!");
+    }
+  });
+});
+
+// Update egg display
+function updateEggDisplay() {
+  eggCountSpan.textContent = eggPoints;
+}
+
+// Start or update Farmer interval
+function startFarmerInterval() {
+  if (farmerInterval) return; // already running
+  farmerInterval = setInterval(() => {
+    eggPoints += farmerCount;
+    updateEggDisplay();
+  }, 1000);
+}
+
+
+
+
