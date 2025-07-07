@@ -2,14 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Flock-U</title>
   <script src="script.js" defer></script>
   <link rel="stylesheet" href="style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
-
 </head>
 
 <body>
@@ -17,15 +16,14 @@
 
     <!-- Site Header -->
     <header class="site-header">
-    <h1>Flock-U</h1>
+      <h1>Flock-U</h1>
       <div class="theme-toggle">
         <label class="switch">
-        <input type="checkbox" id="themeToggle" />
-        <span class="slider round"></span>
-    </label>
-    <p>Toggle light/dark mode</p>
-  </div>
-
+          <input type="checkbox" id="themeToggle" />
+          <span class="slider round"></span>
+        </label>
+        <p>Toggle light/dark mode</p>
+      </div>
     </header>
 
     <!-- Navigation Tabs -->
@@ -47,29 +45,27 @@
 
       <section id="controls">
         <button id="prevPage">Previous Page</button>
-       <select id="chapterSelect">
-        <option 
-          value="chapter1" 
-          data-title="Chapter 1: The Beach" 
-          data-description="After an intense heat day, the Flock Boys go to the beach.">
-          Chapter 1: The Beach
-        </option>
-        <option 
-          value="chapter2" 
-          data-title="Chapter 2: The Talent Show" 
-          data-description="The Flock Boys enter a wild talent show and chaos follows.">
-          Chapter 2: The Talent Show
-        </option>
-      </select>
-
+        <select id="chapterSelect">
+          <option
+            value="chapter1"
+            data-title="Chapter 1: The Beach"
+            data-description="After an intense heat day, the Flock Boys go to the beach.">
+            Chapter 1: The Beach
+          </option>
+          <option
+            value="chapter2"
+            data-title="Chapter 2: The Talent Show"
+            data-description="The Flock Boys enter a wild talent show and chaos follows.">
+            Chapter 2: The Talent Show
+          </option>
+        </select>
         <button id="nextPage">Next Page</button>
       </section>
     </main>
 
-   <!-- Store Section -->
-    <section id="storeSection" style="display:none;">
+    <!-- Store Section -->
+    <section id="storeSection" style="display: none;">
       <h1>Flock Store</h1>
-
       <div class="products">
         <div class="product">
           <img src="images/products/book.jpg" alt="Comic Book" width="200" />
@@ -77,14 +73,12 @@
           <p>$15.00</p>
           <button data-product="book">Add to Cart</button>
         </div>
-
         <div class="product">
           <img src="images/products/placeholderimage.png" alt="Art Print" width="200" />
           <h3>Art Print</h3>
           <p>$5.00</p>
           <button data-product="print">Add to Cart</button>
         </div>
-
         <div class="product">
           <img src="images/products/sticker.jpg" alt="Sticker Pack" width="200" />
           <h3>Sticker Pack</h3>
@@ -104,22 +98,31 @@
       </div>
     </section>
 
-    <!-- Egg Game -->
-    <section id="eggSection" style="display:none;">
+    <!-- Egg Game Section -->
+    <section id="eggSection" style="display: none;">
       <div class="egg-container">
         <button id="eggButton">
           <span id="eggCount">0</span>
           <img src="images/game/egg.jpg" alt="Egg Button" />
         </button>
       </div>
+
+      <!-- Farmer Upgrade -->
+      <div id="farmerUpgrade" class="upgrade" style="display: none;">
+        <div class="upgrade-item">
+          <p>Farmer - Cost: 50 - Owned: <span id="farmerCount">0</span></p>
+          <button class="buy-upgrade" data-cost="50" data-upgrade="farmer">Buy</button>
+        </div>
+      </div>
+
+      <!-- Incubator Upgrade -->
+      <div id="incubatorUpgrade" class="upgrade" style="display: none;">
+        <div class="upgrade-item">
+          <p>Incubator - Cost: 100 - Owned: <span id="incubatorCount">0</span></p>
+          <button class="buy-upgrade" data-cost="100" data-upgrade="incubator">Buy</button>
+        </div>
+      </div>
     </section>
-
-    <!-- farmer upgrade -->
-    <div class="upgrade-item">
-      <p>Farmer - Cost: 50 - Owned: <span id="farmerCount">0</span></p>
-      <button class="buy-upgrade" data-cost="50" data-upgrade="farmer">Buy</button>
-    </div>
-
 
     <!-- Contact Section -->
     <section id="contact">
