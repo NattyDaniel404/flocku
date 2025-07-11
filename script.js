@@ -14,25 +14,28 @@ document.addEventListener("DOMContentLoaded", () => {
   const storeTab = document.getElementById("storeTab");
   const comicsSection = document.getElementById("comicsSection");
   const storeSection = document.getElementById("storeSection");
-  const eggTab = document.getElementById("eggTab");
   const eggSection = document.getElementById("eggSection");
+  const contactSection = document.getElementById("contact")
 
   comicsTab.addEventListener("click", () => {
   comicsSection.style.display = "block";
   storeSection.style.display = "none";
   eggSection.style.display = "none";
+  contactSection.style.display = "block";  
 });
 
 storeTab.addEventListener("click", () => {
   comicsSection.style.display = "none";
   storeSection.style.display = "block";
   eggSection.style.display = "none";
+  contactSection.style.display = "none";
 });
 
 eggTab.addEventListener("click", () => {
   comicsSection.style.display = "none";
   storeSection.style.display = "none";
   eggSection.style.display = "block";
+  contactSection.style.display = "none";
 });
 
 
@@ -105,6 +108,7 @@ eggTab.addEventListener("click", () => {
   updateComicPage();
 
   // === FORM SUBMISSION & VALIDATION ===
+  
   const form = document.getElementById("contactForm");
   const successMessage = document.getElementById("successMessage");
 
@@ -217,59 +221,50 @@ eggTab.addEventListener("click", () => {
 
 // EGG GAME
 
+let chickens = 1;
+let eggs = 0;
+let eggInterval = 60; // seconds
+let countdown = eggInterval;
 
-// clicks = eggs
-let eggPoints = 0;
-let farmerCount = 0;
-let farmerInterval = null;
+const chickenCountSpan = document.getElementById("chickenCount");
+const eggsCountSpan = document.getElementById("eggsCount");
+const eggLog = document.getElementById("eggLog");
+const countdownSpan = document.getElementById("countdown");  
 
-const eggCountSpan = document.getElementById("eggCount");
-const eggButton = document.getElementById("eggButton");
-const upgradeButtons = document.querySelectorAll(".buy-upgrade");
-const farmerCountSpan = document.getElementById("farmerCount");
+// === Countdown Timer Display ===
+setInterval(() => {
+  if (countdown > 0) {
+    countdown--;
+  }
+  countdownSpan.textContent = `Next egg in: ${countdown} second${countdown === 1 ? '' : 's'}`;
+}, 1000);
 
-// Egg click handler
-eggButton.addEventListener("click", () => {
-  eggPoints += 1;
-  updateEggDisplay();
-});
+// === Egg Production Loop (runs every minute) ===
+setInterval(() => {
+  let hatched = 0;
+  let sold = 0;
 
-// Upgrade purchase handler
-upgradeButtons.forEach(btn => {
-  btn.addEventListener("click", () => {
-    const cost = parseInt(btn.dataset.cost);
-    const upgradeType = btn.dataset.upgrade;
-
-    if (eggPoints >= cost) {
-      eggPoints -= cost;
-
-      if (upgradeType === "farmer") {
-        farmerCount++;
-        farmerCountSpan.textContent = farmerCount;
-        startFarmerInterval();
-      }
-
-      updateEggDisplay();
+  // Chickens lay eggs (one egg each)
+  for (let i = 0; i < chickens; i++) {
+    const result = Math.random();
+    if (result < 0.5) {
+      eggs++;
+      sold++;
     } else {
-      alert("Not enough eggs!");
+      chickens++;
+      hatched++;
     }
-  });
-});
+  }
 
-// Update egg display
-function updateEggDisplay() {
-  eggCountSpan.textContent = eggPoints;
-}
+  // Update display
+  chickenCountSpan.textContent = chickens;
+  eggsCountSpan.textContent = eggs;
 
-// Start or update Farmer interval
-function startFarmerInterval() {
-  if (farmerInterval) return; // already running
-  farmerInterval = setInterval(() => {
-    eggPoints += farmerCount;
-    updateEggDisplay();
-  }, 1000);
-}
+  // // Log this production
+  // const logItem = document.createElement("p");
+  // logItem.textContent = `This minute: ${sold} eggs sold, ${hatched} eggs hatched.`;
+  // eggLog.prepend(logItem);
 
-
-
-
+  // Reset countdown for next minute
+  countdown = eggInterval;
+}, eggInterval * 1000);

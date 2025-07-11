@@ -98,31 +98,17 @@
       </div>
     </section>
 
-    <!-- Egg Game Section -->
-    <section id="eggSection" style="display: none;">
-      <div class="egg-container">
-        <button id="eggButton">
-          <span id="eggCount">0</span>
-          <img src="images/game/egg.jpg" alt="Egg Button" />
-        </button>
-      </div>
-
-      <!-- Farmer Upgrade -->
-      <div id="farmerUpgrade" class="upgrade" style="display: none;">
-        <div class="upgrade-item">
-          <p>Farmer - Cost: 50 - Owned: <span id="farmerCount">0</span></p>
-          <button class="buy-upgrade" data-cost="50" data-upgrade="farmer">Buy</button>
-        </div>
-      </div>
-
-      <!-- Incubator Upgrade -->
-      <div id="incubatorUpgrade" class="upgrade" style="display: none;">
-        <div class="upgrade-item">
-          <p>Incubator - Cost: 100 - Owned: <span id="incubatorCount">0</span></p>
-          <button class="buy-upgrade" data-cost="100" data-upgrade="incubator">Buy</button>
-        </div>
-      </div>
-    </section>
+  <!-- Egg Game Section -->
+<section id="eggSection" style="display:none;">
+  <h1>Egg Farm</h1>
+  <p>Chickens: <span id="chickenCount">1</span></p>
+  <p>Eggs: <span id="eggsCount">0</span></p>
+  <p id="countdown">Next egg in: 60 seconds</p>
+  
+  <div id="eggLog">
+    <p>Waiting for eggs...</p>
+  </div>
+</section>
 
     <!-- Contact Section -->
     <section id="contact">
