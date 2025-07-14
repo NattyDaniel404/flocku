@@ -99,16 +99,34 @@
     </section>
 
   <!-- Egg Game Section -->
-<section id="eggSection" style="display:none;">
+<section id="eggSection" style="display: none;">
   <h1>Egg Farm</h1>
-  <p>Chickens: <span id="chickenCount">1</span></p>
-  <p>Eggs: <span id="eggsCount">0</span></p>
-  <p id="countdown">Next egg in: 60 seconds</p>
-  
-  <div id="eggLog">
-    <p>Waiting for eggs...</p>
+  <p>Money: $<span id="moneyCount">0</span></p>
+
+  <div class="birdBox" id="chickenBox">
+    <h2>Chickens</h2>
+
+    
+    <div class="stats">
+      <p>Chickens: <span id="chickenCount">1</span> / <span id="maxChickenCount">5</span></p>
+      <p>Eggs: <span id="eggCount">0</span></p>
+      <p id="productionRate">Eggs per minute: 1</p>
+    </div>
+
+    <div class="actions">
+      <button id="sellEggsButton">Sell Eggs ($1 each)</button>
+      <button id="buyCoopButton">Buy Coop ($100)</button>
+      <button id="buyFarmerButton">Hire Farmer ($500)</button>
+    </div>
   </div>
+
+<div class="birdBox" id="duckBox">
+  
+</div>
+  
 </section>
+
+
 
     <!-- Contact Section -->
     <section id="contact">

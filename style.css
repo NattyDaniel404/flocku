@@ -395,80 +395,50 @@ footer {
 
 
 /* EGG GAME */
-.egg-container {
-  position: relative;
-  display: inline-block;
-}
 
-#eggButton {
-  position: relative;
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-}
-
-#eggButton img {
-  display: block;
-  width: 200px;
-  height: auto;
-  border-radius: 8px;
- 
-}
-
-#eggCount {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background-color: #305880;
-  color: white;
-  padding: 4px 8px;
-  border-radius: 50%;
-  font-size: 1.2rem;
-  font-weight: bold;
-}
-
-#eggSection {
-  padding: 50px;
+/* Chicken */
+#chickenBox {
+  width: 300px;
+  height: 400px;
+  background: #f9e4b7;
+  border-radius: 50% 50% 45% 45% / 60% 60% 40% 40%;
+  border: 3px solid #d4b483;
+  padding: 20px;
+  box-sizing: border-box;
   text-align: center;
+  margin: 20px auto;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-.egg-container {
-  position: relative;
-  display: inline-block;
-}
-
-/* UPGRADES */
-
-.upgrades {
-  margin-top: 30px;
-  text-align: left;
-}
-
-.upgrade-item {
+#chickenBox h2 {
   margin-bottom: 15px;
-  padding: 10px;
-  border: 2px solid #305880;
-  border-radius: 8px;
-  max-width: 300px;
+  color: #4b3f2f;
+  font-family: serif;
 }
 
-.upgrade-item p {
-  margin: 0 0 8px;
-  font-weight: bold;
+#chickenBox .stats p {
+  margin: 8px 0;
+  font-size: 1.2rem;
+  color: #4b3f2f;
 }
 
-.buy-upgrade {
-  padding: 8px 16px;
-  background-color: #305880;
-  color: white;
+#chickenBox .actions {
+  margin-top: 20px;
+}
+
+#chickenBox .actions button {
+  display: block;
+  width: 80%;
+  margin: 8px auto;
+  padding: 10px 15px;
+  background-color: #d4b483;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
+  font-weight: bold;
   transition: background-color 0.3s ease;
 }
 
-.buy-upgrade:hover {
-  background-color: #1f3c5c;
+#chickenBox .actions button:hover {
+  background-color: #c19b6e;
 }
-

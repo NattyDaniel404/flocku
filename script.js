@@ -219,52 +219,122 @@ eggTab.addEventListener("click", () => {
 
 
 
-// EGG GAME
+// === EGG GAME ===
+
+// === EGG GAME ===
 
 let chickens = 1;
 let eggs = 0;
-let eggInterval = 60; // seconds
-let countdown = eggInterval;
+let money = 1000;
+let farmers = 0;
 
+let maxChickens = 5;
+let eggsPerMinute = 1;
+
+let eggProductionInterval = null;
+
+// === DOM ===
 const chickenCountSpan = document.getElementById("chickenCount");
-const eggsCountSpan = document.getElementById("eggsCount");
-const eggLog = document.getElementById("eggLog");
-const countdownSpan = document.getElementById("countdown");  
+const eggCountSpan = document.getElementById("eggCount");
+const moneyCountSpan = document.getElementById("moneyCount");
+const maxChickenCountSpan = document.getElementById("maxChickenCount");
+const productionRateSpan = document.getElementById("productionRate");
 
-// === Countdown Timer Display ===
-setInterval(() => {
-  if (countdown > 0) {
-    countdown--;
-  }
-  countdownSpan.textContent = `Next egg in: ${countdown} second${countdown === 1 ? '' : 's'}`;
-}, 1000);
+const sellEggsButton = document.getElementById("sellEggsButton");
+const buyCoopButton = document.getElementById("buyCoopButton");
+const buyFarmerButton = document.getElementById("buyFarmerButton");
 
-// === Egg Production Loop (runs every minute) ===
-setInterval(() => {
-  let hatched = 0;
-  let sold = 0;
+// === Egg Production Loop ===
+function startEggProductionLoop() {
+  if (eggProductionInterval) clearInterval(eggProductionInterval);
 
-  // Chickens lay eggs (one egg each)
-  for (let i = 0; i < chickens; i++) {
-    const result = Math.random();
-    if (result < 0.5) {
-      eggs++;
-      sold++;
-    } else {
+  const intervalTime = 60000 / eggsPerMinute; // ms per cycle
+
+  eggProductionInterval = setInterval(() => {
+    produceEggs();
+  }, intervalTime);
+
+  updateProductionRateDisplay();
+}
+
+function produceEggs() {
+  let laid = chickens;
+
+  for (let i = 0; i < laid; i++) {
+    if (chickens < maxChickens && Math.random() > 0.5) {
       chickens++;
-      hatched++;
+      logMessage("An egg hatched into a chicken!");
+    } else {
+      eggs++;
+      logMessage("Egg produced!");
     }
   }
 
-  // Update display
+  updateDisplay();
+}
+
+// === Sell Eggs Button ===
+function sellEggs() {
+  if (eggs > 0) {
+    money += eggs;
+    logMessage(`Sold ${eggs} eggs for $${eggs}.`);
+    eggs = 0;
+    updateDisplay();
+  } else {
+    logMessage("No eggs to sell!");
+  }
+}
+sellEggsButton.addEventListener("click", sellEggs);
+
+// === Buy Coop Button ===
+function buyCoop() {
+  if (money >= 100) {
+    money -= 100;
+    maxChickens += 5;
+    logMessage("Bought a new coop! Max chickens increased.");
+    updateDisplay();
+  } else {
+    logMessage("Not enough money to buy a coop!");
+  }
+}
+buyCoopButton.addEventListener("click", buyCoop);
+
+// === Buy Farmer Button ===
+function buyFarmer() {
+  if (money >= 500) {
+    money -= 500;
+    farmers++;
+    increaseProduction();
+    logMessage("Hired a new farmer!");
+    updateDisplay();
+  } else {
+    alert("Not enough money to hire a farmer!");
+  }
+}
+buyFarmerButton.addEventListener("click", buyFarmer);
+
+function increaseProduction() {
+  eggsPerMinute = 1 + farmers;
+  startEggProductionLoop();
+}
+
+// === Display Updates ===
+function updateDisplay() {
   chickenCountSpan.textContent = chickens;
-  eggsCountSpan.textContent = eggs;
+  eggCountSpan.textContent = eggs;
+  moneyCountSpan.textContent = money;
+  maxChickenCountSpan.textContent = maxChickens;
+  updateProductionRateDisplay();
+}
 
-  // // Log this production
-  // const logItem = document.createElement("p");
-  // logItem.textContent = `This minute: ${sold} eggs sold, ${hatched} eggs hatched.`;
-  // eggLog.prepend(logItem);
+function updateProductionRateDisplay() {
+  productionRateSpan.textContent = `Eggs per Minute: ${eggsPerMinute}`;
+}
 
-  // Reset countdown for next minute
-  countdown = eggInterval;
-}, eggInterval * 1000);
+function logMessage(message) {
+  console.log(message);
+}
+
+// === Start Production ===
+startEggProductionLoop();
+updateDisplay();
