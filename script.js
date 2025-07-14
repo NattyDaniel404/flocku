@@ -225,7 +225,7 @@ eggTab.addEventListener("click", () => {
 
 let chickens = 1;
 let eggs = 0;
-let money = 1000;
+let money = 0;
 let farmers = 0;
 
 let maxChickens = 5;
